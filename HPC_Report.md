@@ -137,3 +137,46 @@ for (Thread thread : threads) {
 This step is analogous to synchronising distributed nodes to ensure that all parts of a distributed task have been completed before moving on to the next step.
 
 In summary, this implementation successfully simulates a distributed network environment for matrix multiplication. It incorportates key aspects of distributed computing, such as network delay simulation, manual thread mmanagement, workload distribution, and thread synchronization. This simulation helps in understanding the complexities and performance implications of distributing computational tasks across multiple nodes in a network, a common scenario in modern computing paradigms like cloud computing and distributed data processing.
+
+## Task 4
+ For this task the code simulates node failures in a distributed computing environment, an essiential aspect to understand and mitigate in real-world systems. This simulation aims to demonstrate how system instability, represented by random node (thread) failures, can impact the overall computation process, particularly in tasks that require high reliability and consistency, like matrix multiplication.
+
+### Key Aspects of the Implementation
+
+#### Node Failure Simulation:
+The most critical part of this task is simulating the failure of nodes (threads). This is achievied by introducing a probabilistic model where each thread, after completing its task, decides whether to "fail" and discard its results. This is demonstrated in the following snippet: 
+
+~~~java
+if (random.nextDouble() > FAILURE_PROBABILITY) {
+    // Perform calculations
+} else {
+    System.out.println("Thread for row " + currentRow + " failed.");
+}
+~~~
+
+Here, `FAILURE_PROBABILITY` determines the likelihood of each thread failing. The higher this value, the greater the chance of failure, thus introducing more instability into the system.
+
+#### Matrix Multiplication with Potential Failures:
+
+Threads perform the matrix multiplication task as they would in stable system. However, due to the introduced failure mechanism, not all threads may contribute their results to the final matrix:
+
+~~~java
+for (int col = 0; col < SIZE; col++) {
+    for (int k = 0; k < SIZE; k++) {
+        result[currentRow][col] += matrix1[currentRow][k] * matrix2[k][col];
+    }
+}
+~~~
+In the event of a thread failure, the corresponding row in the result matrix remains incomplete or incorrect, reflecting the impact of node failure.
+
+#### Thread Management and Synchronization
+Threads are managed manually, with each thread being responsible for a specific part of the matrix. The `thread.join()` method ensures that the main thread waits for all worker threads to complete (or fail) before proceeding.
+
+~~~java
+for (Thread thread : threads) {
+    thread.join();
+}
+~~~
+This step is crucial to synchronize the completion of tasks and to aggregate the final result.
+
+In conclusion, this implementation provides a valuable insight into the challenges of distributed computing, particularly the aspects related to node failure and system stability. By simulating these failures, it becomes possible to observe the effects on the computational process and understand the importance of designing systems that are resilient to such failures. This task highlights the need for fault-tolerant algorithms and systems, especially in critial applications where data integrity and consistency are paramount. The random nature of the simulation also serves as a reminder of the unpredictability inherent in distributed systems and the neccessity for robust error- handling and recovery mechanisms.
