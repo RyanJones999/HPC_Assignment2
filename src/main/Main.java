@@ -42,7 +42,7 @@ public class Main {
         // Task 2: Multi-threaded matrix multiplication
         System.out.println("Performing multi-threaded matrix multiplication (Task 2)...");
         startTime = System.currentTimeMillis();
-        System.out.println(threadCount);
+        //System.out.println(threadCount);
         double[][] multiThreadedResult = Task2.multiThreadMultiply(matrix1, matrix2, threadCount);
         multiThreadedResult = Task2.multiThreadMultiply(multiThreadedResult, matrix3, threadCount);
         endTime = System.currentTimeMillis();

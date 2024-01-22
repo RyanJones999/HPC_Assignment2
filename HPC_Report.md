@@ -34,7 +34,7 @@ Here `generateMatrix` is a method that created a 1000x1000 matrix filled with ra
         return matrix;
     }
 ~~~
-The core of the task is the matrix multiplication, achieved through nested loops:
+The core of the task is the matrix multiplication, achieved through nested loops. I used the row by column method. Each loop runs its full course before the next iteration of its parent loop begins. This is a hallmark of sequential processing, where the computations are carried out in a strict order. (Khaled and Sumaia, 2012)
 
 [HPC_Assignment2/src/main/Task1.java](https://github.com/RyanJones999/HPC_Assignment2/blob/585d74396b10eb54cc8e0942ad028f624093ee84/src/main/Task1.java#L43)
 ~~~java

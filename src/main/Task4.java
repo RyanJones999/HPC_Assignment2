@@ -21,7 +21,7 @@ public class Task4 {
         // Perform the second matrix multiplication
         double[][] finalResult = performMultiplication(result1, matrix3);
 
-        // Optional: print a portion of the final result for verification
+        // Print a portion of the final result for verification
         printMatrixPortion(finalResult);
     }
 
